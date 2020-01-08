@@ -1,0 +1,32 @@
+.navbar {
+    position: relative;
+    margin-bottom: 1px;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #f28b00;
+    font-family: "Comic Sans MS";
+    font-weight: bold;
+ }
+
+.navbar-inverse .navbar-brand {
+    font-weight: bolder;
+    font-size: 18px;
+    font-family: "Comic Sans MS";
+    background-image: -webkit-linear-gradient(0deg, #f35626, #f39823);
+    color: #000;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: hue 3s infinite linear alternate-reverse;
+}
+@keyframes hue {
+    from{
+        background-image: -webkit-linear-gradient(0deg, #f35626, #f39823);
+    }
+    to{
+        background-image: -webkit-linear-gradient(0deg, #f39823, #f35626);
+    }
+}
+
+

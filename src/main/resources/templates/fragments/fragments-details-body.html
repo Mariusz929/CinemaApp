@@ -1,0 +1,40 @@
+<div class="container" data-th-fragment="details-body">
+    <div class="panel-group" style="margin-top:40px">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+            </div>
+
+            <div class="panel-body">
+                <h3 th:utext="${movie.title}"></h3><br/>
+                <table id="detailsTable" class="cell-border">
+                    <thead>
+                    <tr>
+                        <th>Poster</th>
+                        <th>Title</th>
+                        <th>Genre</th>
+                        <th>Director</th>
+                        <th>Description</th>
+                        <th>Duration (min)</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td><img th:src="@{'/image/' + ${movie.id} + '.jpg'}"></td>
+                        <td th:text="${movie.title}"></td>
+                        <td th:text="${movie.genre}"></td>
+                        <td th:text="${movie.director}"></td>
+                        <td th:text="${movie.description}"></td>
+                        <td th:text="${movie.durationMin}"></td>
+                    </tr>
+                    </tbody>
+
+                    <tfoot>
+                    </tfoot>
+                </table>
+                <br/>
+                <a class="btn btn-md btn-warning btn-block" href="/repertoir">Back To Screenings List</a>
+            </div>
+        </div>
+    </div>
+</div>

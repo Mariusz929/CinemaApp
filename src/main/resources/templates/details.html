@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8"/>
+    <title th:utext="${movie.title} + ' details'"></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#detailsTable').DataTable({
+                "paging": false,
+                "info": false,
+                "searching": false
+            });
+        });</script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/navbar.css}" />
+</head>
+
+<body>
+<div sec:authorize="isAuthenticated()">
+    <nav data-th-replace="fragments/fragments-regular-navbar :: regular-navbar"></nav>
+</div>
+<div sec:authorize="!isAuthenticated()">
+    <nav data-th-replace="fragments/fragments-guest-navbar :: guest-navbar"></nav>
+</div>
+
+<div data-th-replace="fragments/fragments-details-body :: details-body"></div>
+
+</body>
+</html>

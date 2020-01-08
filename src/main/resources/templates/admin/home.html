@@ -1,0 +1,75 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/navbar.css}" />
+    <script th:inline="javascript">
+        window.onload = function() {
+            var titles = /*[[${titles}]]*/ "defaultvalue"
+            var titleResNumbers = /*[[${titleResNumbers}]]*/ "defaultvalue"
+            var sumTitleRes = titleResNumbers.reduce(add, 0);
+            var chart = new CanvasJS.Chart("chartContainer", {
+                theme: "dark1", // "light1", "light2", "dark1", "dark2"
+                exportEnabled: true,
+                animationEnabled: true,
+                title: {
+                    text: "Most Popular Movies"
+                },
+                data: [{
+                    type: "pie",
+                    startAngle: 25,
+                    toolTipContent: "<b>{label}</b>: {y}%",
+                    showInLegend: "true",
+                    legendText: "{label}",
+                    indexLabelFontSize: 16,
+                    indexLabel: "{label} - {y}%",
+                    dataPoints: [
+                        { y: (titleResNumbers[0]/sumTitleRes*100).toFixed(2), label:  titles[0] },
+                        { y: (titleResNumbers[1]/sumTitleRes*100).toFixed(2), label:  titles[1] }
+                    ]
+                }]
+            });
+
+            var auditNames = /*[[${auditNames}]]*/ "defaultvalue"
+            var auditResNumbers = /*[[${auditResNumbers}]]*/ "defaultvalue"
+            var sumAuditRes = auditResNumbers.reduce(add, 0);
+            var chart2 = new CanvasJS.Chart("chartContainer2", {
+                theme: "dark1", // "light1", "light2", "dark1", "dark2"
+                exportEnabled: true,
+                animationEnabled: true,
+                title: {
+                    text: "Most Often Chosen Auditorium"
+                },
+                data: [{
+                    type: "pie",
+                    startAngle: 25,
+                    toolTipContent: "<b>{label}</b>: {y}%",
+                    showInLegend: "true",
+                    legendText: "{label}",
+                    indexLabelFontSize: 16,
+                    indexLabel: "{label} - {y}%",
+                    dataPoints: [
+                        { y: (auditResNumbers[0]/sumAuditRes*100).toFixed(2), label: auditNames[0]  },
+                        { y: (auditResNumbers[1]/sumAuditRes*100).toFixed(2), label: auditNames[1]  }
+                    ]
+                }]
+            });
+            function add(a, b) {
+                return a + b;
+            }
+            chart.render();
+            chart2.render();}
+    </script>
+</head>
+<body>
+<nav data-th-replace="fragments/fragments-admin-navbar :: admin-navbar"></nav>
+
+<br/><div id="chartContainer" style="height: 370px; width: 100%;"></div><br/>
+<div id="chartContainer2" style="height: 370px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>

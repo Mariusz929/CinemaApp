@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Edit User</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/navbar.css}"/>
+</head>
+
+<body>
+<nav data-th-replace="fragments/fragments-regular-navbar :: regular-navbar"></nav>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel-group" style="margin-top:40px">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <span th:utext="'Editing User ' + ${edituser.email}"></span>
+                    </div>
+                    <div class="panel-body">
+                        <h3>Edit Your Profile</h3>
+                        <form action="#" th:action="@{/regular/editProfile}" th:object="${edituser}" method="post">
+                            <input type="hidden" id="id" th:field="*{id}"/>
+                            <input type="hidden" id="active" th:field="*{active}"/>
+                            <input type="hidden" id="roles" th:field="*{roles}"/> <br/>
+                            <input id="email" th:field="*{email}" class="form-control"/> <br/>
+                            <input id="name" th:field="*{name}" class="form-control"/> <br/>
+                            <input id="lastName" th:field="*{lastName}" class="form-control"/> <br/>
+                            <input type="password" id="password" th:field="*{password}" placeholder="password"
+                                   class="form-control"/> <br/>
+
+                            <input type="reset" class="btn btn-md btn-warning btn-block" value="Reset"/>
+                            <input type="submit" class="btn btn-md btn-success btn-block" value="Save Changes"/>
+                            <div class="clear"></div>
+                        </form>
+                        <p class="success-message-text text-center" th:utext="${successMessage}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

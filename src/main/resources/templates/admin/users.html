@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Application Users</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#usersTable').DataTable();
+        });</script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/navbar.css}" />
+</head>
+
+<body>
+<nav data-th-replace="fragments/fragments-admin-navbar :: admin-navbar"></nav>
+<div class="container">
+    <div class="panel-group" style="margin-top:40px">
+        <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+            </div>
+            <div class="panel-body">
+                <h3>Users</h3><br/>
+                <table id="usersTable" class="cell-border">
+                    <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Name</th>
+                        <th>Last Name</th>
+                        <th>Edit</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="user : ${users}">
+                        <td th:text="${user.email}"></td>
+                        <td th:text="${user.name}"></td>
+                        <td th:text="${user.lastName}"></td>
+                        <td style="text-align: center"><a class="btn btn-lg btn-primary" style="color: #FFFFFF" th:href="@{'/admin/editUser/' + ${user.id}}"><span class="glyphicon glyphicon-edit"></span></a></td>
+                    </tr>
+                    </tbody>
+
+                    <tfoot>
+                    <tr>
+                        <th>Email</th>
+                        <th>Name</th>
+                        <th>Last Name</th>
+                        <th>Edit</th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

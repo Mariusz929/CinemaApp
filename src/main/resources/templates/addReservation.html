@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Reservation</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/navbar.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/hall.css}" />
+</head>
+
+<body>
+<div sec:authorize="isAuthenticated()">
+    <nav data-th-replace="fragments/fragments-regular-navbar :: regular-navbar"></nav>
+</div>
+<div sec:authorize="!isAuthenticated()">
+    <nav data-th-replace="fragments/fragments-guest-navbar :: guest-navbar"></nav>
+</div>
+<div class="container">
+    <div class="panel-group" style="margin-top:40px">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+            </div>
+            <div class="panel-body">
+                <h3>Make Reservation</h3>
+                <br/>
+                <div class="screen">
+                    <div>SCREEN</div>
+                </div>
+                <form autocomplete="off" action="#" th:action="@{/addReservation}"
+                      th:object="${reservationDTO}" method="POST" class="form-horizontal">
+                    <input type="hidden" id="screeningid" th:field="*{screeningid}"/>
+                    <input type="hidden" id="reservationid" th:field="*{reservationid}"/>
+                    <div class="hall">
+                        <ol>
+                            <ol class="seats" th:each="rowno: ${#numbers.sequence(1, rows)}">
+                                <label th:text="${rowno}"></label>
+                                <li class="seat" th:each="seat: ${seats}" th:if="${seat.row==rowno}">
+                                    <input type="checkbox" th:id="${seat.id}" th:value="${seat.id}" th:name="place" th:disabled="${#lists.contains(alreadyReserved, seat.id)}"/>
+                                    <label th:for="${seat.id}" th:text="${seat.number}"></label>
+                                </li>
+                            </ol>
+                        </ol><br/>
+                        <div sec:authorize="isAuthenticated()">
+                            <input type="hidden" id="userreservedemail1" th:field="*{userreservedemail}"/>
+                        </div>
+                        <div style="width:100%; margin: 0 auto;" sec:authorize="!isAuthenticated()">
+                            <h4 style="text-align:center; color:red; font-size: 1.10em; font-weight: bold; text-shadow: 1px 1px black;">You are not registered! Please put your correct e-mail address here!</h4>
+                            <input type="email" id="userreservedemail2" class="form-control" th:field="*{userreservedemail}"/>
+                        </div>
+                    </div><br/><br/>
+
+                    <button class="btn btn-lg btn-success btn-block" name="Submit" type="Submit"
+                            th:text="Confirm+' '+Reservation"></button><br/>
+                </form>
+                <p class="success-message-text text-center" th:utext="${successMessage}"></p>
+                <!-- HELP VARIABLES
+                <p class="success-message-text text-center" th:utext="${places}"></p>
+                <p class="success-message-text text-center" th:utext="${test}"></p>
+                <p class="admin-message-text text-center" th:text="${alreadyReserved}"></p>-->
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

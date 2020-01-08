@@ -1,0 +1,82 @@
+body {
+    background-color: #333333;
+    font-family: "Comic Sans MS";
+}
+
+.success-message-text {
+    font-style: normal;
+    font-size: 22px;
+    color: #5cb85c;
+}
+
+.admin-message-text {
+    color: #666666;
+}
+
+.panel {
+    background-color: #666666;
+}
+
+.panel-default {
+    border: 2px solid #f28b00;
+    border-style: outset;
+    border-radius: 5px;
+    box-shadow: 1px 1px 50px #b3c07d;
+}
+
+.panel-default .panel-heading {
+    background-color: #222222;
+    color: #f28b00;
+}
+
+.panel-default .panel-body {
+    background-color: #666666;
+    color: black;
+}
+
+table {
+    border-collapse: collapse;
+
+}
+
+tr {
+    border: 1px solid white;
+    color: black;
+}
+
+th {
+    border: 1px solid white;
+    font-size: larger;
+    color: #f39823;
+    background-color: #777777;
+    text-shadow: 1px 1px #9d0612;
+}
+
+td {
+    background-color: #888888;
+    font-size: medium;
+    border: 1px  solid white;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+    color: #333 !important;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 5em;
+}
+
+h3 {
+    color: #f28b00;
+    font-weight: bold;
+    text-shadow: 2px 2px #9d0612;
+}
+
+label {
+    font-size: medium;
+}
+
+.form-control:focus {
+    box-shadow: 1px 1px 20px #c9f371;
+}

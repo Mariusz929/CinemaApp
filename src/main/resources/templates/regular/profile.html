@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/navbar.css}"/>
+</head>
+
+<body>
+<nav data-th-replace="fragments/fragments-regular-navbar :: regular-navbar"></nav>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel-group" style="margin-top:40px">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <span th:utext="${userName}"></span>
+                    </div>
+                    <div class="panel-body">
+                        <h3 align="left">Your Profile</h3><br/>
+                        <label th:text="'Email: ' + ${user.email}"></label><br/>
+                        <label th:text="'Name: ' + ${user.name}"></label><br/>
+                        <label th:text="'Last Name: ' + ${user.lastName}"></label><br/><br/>
+
+                        <form th:action="@{'/regular/editProfile/' + ${user.id}}" method="get">
+                            <button class="btn btn-md btn-warning btn-block" type="Submit">Edit Profile Data</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

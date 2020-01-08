@@ -1,0 +1,49 @@
+<div class="container" data-th-fragment="repertoir-body">
+    <div class="panel-group" style="margin-top:40px">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+            </div>
+
+            <div class="panel-body">
+                <h3>Actual Screenings</h3><br/>
+                <table id="screeningsTable" class="cell-border">
+                    <thead>
+                    <tr>
+                        <th>Poster</th>
+                        <th>Title</th>
+                        <th>Date</th>
+                        <th>Hour</th>
+                        <th>Auditorium</th>
+                        <th>Details</th>
+                        <th>Reserve</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="screening: ${screenings}">
+                        <td><img th:src="@{'/image/' + ${screening.movieid} + '.jpg'}"></td>
+                        <td th:text="${screening.title}"></td>
+                        <td th:text="${screening.screeningStartDate}"></td>
+                        <td th:text="${screening.screeningStartHour}"></td>
+                        <td th:text="${screening.name}"></td>
+                        <td style="text-align: center"><a class="btn btn-lg btn-primary" style="color: #FFFFFF" th:href="@{'/details/' + ${screening.movieid}}"><span class="glyphicon glyphicon-info-sign"></span></a></td>
+                        <td style="text-align: center"><a class="btn btn-lg btn-success" style="color: #FFFFFF" th:href="@{'/addReservation/' + ${screening.id}}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                    </tr>
+                    </tbody>
+
+                    <tfoot>
+                    <tr>
+                        <th>Poster</th>
+                        <th>Title</th>
+                        <th>Date</th>
+                        <th>Hour</th>
+                        <th>Auditorium</th>
+                        <th>Details</th>
+                        <th>Reserve</th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

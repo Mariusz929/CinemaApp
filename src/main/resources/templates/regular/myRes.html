@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>My Reservations</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#reservationsTable, #inactiveTable').DataTable({
+                "order": [[ 1, "asc" ]]
+            });
+        });</script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/navbar.css}" />
+</head>
+
+<body>
+<nav data-th-replace="fragments/fragments-regular-navbar :: regular-navbar"></nav>
+<div class="container">
+    <div class="panel-group" style="margin-top:40px">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span th:utext="${userName}"></span>
+            </div>
+            <div class="panel-body">
+                <h3>Your Current Reservations</h3>
+
+                <table id="reservationsTable" class="cell-border">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Hour</th>
+                    <th>Auditorium Name</th>
+                    <th>Reserved Seats</th>
+                    <th>Cancel</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="reservation : ${activeReservations}">
+                    <td th:text="${reservation.movietitle}"></td>
+                    <td th:text="${reservation.screeningStartDate}"></td>
+                    <td th:text="${reservation.screeningStartHour}"></td>
+                    <td th:text="${reservation.auditoriumname}"></td>
+                    <td th:text="${reservation.seatsquantity}"></td>
+                    <td style="text-align: center"><a class="btn btn-lg btn-danger" style="color: #FFFFFF" th:href="@{'/regular/cancelRes/' + ${reservation.id}}"><span class="glyphicon glyphicon-remove"></span></a></td>
+                </tr>
+                </tbody>
+
+                <tfoot>
+                <tr>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Hour</th>
+                    <th>Auditorium Name</th>
+                    <th>Reserved Seats</th>
+                    <th>Cancel</th>
+                </tr>
+                </tfoot>
+                </table><br/>
+
+                <h3>Your Reservation History</h3>
+                <table id="inactiveTable" class="cell-border">
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Date</th>
+                        <th>Hour</th>
+                        <th>Auditorium Name</th>
+                        <th>Reserved Seats</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="reservation : ${inactiveReservations}">
+                        <td th:text="${reservation.movietitle}"></td>
+                        <td th:text="${reservation.screeningStartDate}"></td>
+                        <td th:text="${reservation.screeningStartHour}"></td>
+                        <td th:text="${reservation.auditoriumname}"></td>
+                        <td th:text="${reservation.seatsquantity}"></td>
+                    </tr>
+                    </tbody>
+
+                    <tfoot>
+                    <tr>
+                        <th>Title</th>
+                        <th>Date</th>
+                        <th>Hour</th>
+                        <th>Auditorium Name</th>
+                        <th>Reserved Seats</th>
+                    </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
